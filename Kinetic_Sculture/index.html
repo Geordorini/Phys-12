@@ -57,10 +57,11 @@ The assembly was a very difficult procces for me since, as metionoded earlier, I
 
 This might be the ugliest project you have ever seen, but it certainly is a project. The wheel does spin as does the axel and so the cams.  
 
-![Carwheel](./Carwheel.jpg)
+![Carwheel](./carwheel.jpg)
 
-![video](./Video.mp4)
+There is a video of the car at the bottom of the page. 
 
+Ohms law
 
 ### The Circutry 
 
@@ -68,9 +69,46 @@ I then needed to make  a cool arduino thing, I wanted to make a switch that you 
 
 ![onlinecircut](./onlinecircut.png)
 
- 
+ Here is the code for this cicrutry setup. I used this video https://www.youtube.com/watch?v=cFFwFCuSZN4 a lot while making the code. I also used the inclass work code a lot as well. 
+
+
+/*  Code to run motor in one direction based on potentiometer reading.
+ *  Motor driver speed control on pin 3 (direction LOW by default)
+ *  Potentiometer plugged into A0, A2, and A4 on Arduino Uno (or similar).
+ */
+int ledPin =  9;
+int switchPin= 7;
+
+void setup() {
+  pinMode(3, OUTPUT);
+  pinMode(A0, OUTPUT);  //This will be GND for the potentiometer
+  pinMode(A4, OUTPUT);  //This will be 3.3V for the pot
+  pinMode(ledPin, OUTPUT);
+  pinMode(switchPin, INPUT);
+
+  digitalWrite(A0, LOW);
+  digitalWrite(A4, HIGH);
+  Serial.begin(9600);
+}
+
+void loop() {
+  //If the button is not pressed the motor cannot run
+  if (digitalRead(switchPin))(
+    digitalWrite(ledPin, HIGH)
+  );
+  int pot_value = analogRead(A2);   //pot wiper is on A2
+  int motor_speed = map(pot_value, 0, 1023, 255, 0); // map motor_level to pot_value so that zero corresponds to lowest speed
+  analogWrite(3, motor_speed);
+  delay(1)
+  ;
+}
 
 </xmp>
+
+<video controls>
+  <source src="video.mp4" type="video /mpeg">
+
+</video>
 
 </body>
 

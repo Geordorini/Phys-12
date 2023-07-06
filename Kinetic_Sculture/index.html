@@ -79,26 +79,26 @@ I then needed to make  a cool arduino thing, I wanted to make a switch that you 
 int ledPin =  9;
 int switchPin= 7;
 
-void setup() {
-  pinMode(3, OUTPUT);
-  pinMode(A0, OUTPUT);  //This will be GND for the potentiometer
-  pinMode(A4, OUTPUT);  //This will be 3.3V for the pot
-  pinMode(ledPin, OUTPUT);
-  pinMode(switchPin, INPUT);
+void setup() { <br>
+  pinMode(3, OUTPUT); <br>
+  pinMode(A0, OUTPUT);  //This will be GND for the potentiometer  <br>
+  pinMode(A4, OUTPUT);  //This will be 3.3V for the pot  <br>
+  pinMode(ledPin, OUTPUT);  <br>
+  pinMode(switchPin, INPUT); <br>
 
-  digitalWrite(A0, LOW);
-  digitalWrite(A4, HIGH);
-  Serial.begin(9600);
+  digitalWrite(A0, LOW);  <br>
+  digitalWrite(A4, HIGH);  <br>
+  Serial.begin(9600); <br>
 }
 
 void loop() {
-  //If the button is not pressed the motor cannot run
-  if (digitalRead(switchPin))(
+  //If the button is not pressed the motor cannot run <br>
+  if (digitalRead(switchPin))( <br>
     digitalWrite(ledPin, HIGH)
-  );
-  int pot_value = analogRead(A2);   //pot wiper is on A2
-  int motor_speed = map(pot_value, 0, 1023, 255, 0); // map motor_level to pot_value so that zero corresponds to lowest speed
-  analogWrite(3, motor_speed);
+  ); <br>
+  int pot_value = analogRead(A2);   //pot wiper is on A2 <br>
+  int motor_speed = map(pot_value, 0, 1023, 255, 0); // map motor_level to pot_value so that zero corresponds to lowest speed <br>
+  analogWrite(3, motor_speed); <br>
   delay(1)
   ;
 }
@@ -106,7 +106,7 @@ void loop() {
 </xmp>
 
 <video controls>
-  <source src="video.mp4" type="video /mpeg">
+  <source src="Video.mp4" type="Video /mpeg">
 
 </video>
 

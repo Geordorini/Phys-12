@@ -78,10 +78,10 @@ I then needed to make  a cool arduino thing, I wanted to make a switch that you 
 
 /*  Code to run motor in one direction based on potentiometer reading.
  *  Motor driver speed control on pin 3 (direction LOW by default)
- *  Potentiometer plugged into A0, A2, and A4 on Arduino Uno (or similar).
+ *  Potentiometer plugged into A0, A2, and A4 on Arduino Uno .
  */
-int ledPin =  9;
-int switchPin= 7;
+int ledPin =  9; <br>
+int switchPin= 7; <br>
 
 void setup() { <br>
   pinMode(3, OUTPUT); <br>
@@ -103,7 +103,7 @@ void loop() {
   int pot_value = analogRead(A2);   //pot wiper is on A2 <br>
   int motor_speed = map(pot_value, 0, 1023, 255, 0); // map motor_level to pot_value so that zero corresponds to lowest speed <br>
   analogWrite(3, motor_speed); <br>
-  delay(1)
+  delay(100)
   ;
 }
 
@@ -112,7 +112,7 @@ void loop() {
 
 
 
-  <image src=IMG src="Video1.gif">
+  <image src="Video1.gif" alt="vidplzwork"> 
 
 
 </body>

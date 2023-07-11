@@ -21,6 +21,7 @@
 
 
 <xmp style="display:ct;">
+
 <br> 
 
 
@@ -80,6 +81,126 @@ Then I exported it into prusa then began to 3d print it. Here are the results.
 </body>
 
 
+
+
+
+<body>
+
+
+<xmp style="display:ct;">
+<br> 
+
+#### Week 2: Laser Cuttering and 3d Cad 
+
+
+
+
+
+
+Laser cutting is a very fast form of digital fabrication that is capable of printing different materials in seconds. The laser cutter only prints in 2d but using press fit designs it is possible to make 3d objects. In order to make a press fit design work the thickness of the material has to match the width of the notch. The notch is the hole designed to fit around the material to connect different pieces.
+
+
+
+![First Try](./Firstmeasurementr.png)
+
+Speaking of Design, above is my first iteration of the press fit piece. I wanted to make an abstract structure using one piece. The first design was a diamond that measured 50 by 35 millimeters. In order to make this design I first created a new file in Fusion 360. Then I created a new sketch. I chose to do my sketch from the top. I then used the rectangle tool to make a rectangle of those dimensions. Then I used the line tool to connect the adjacent midpoints in the rectangle. Then, I deleted the original lines of the rectangle and was left with the product above. 
+
+
+![First Kerf](./Measurementsfirstkerfr.png)
+
+In the first iteration of the design I made, I presumed the Kerf of the laser cutter was .8 millimeters. The kerf is the material that the laser cutter takes off from the material that goes unaccounted for in a design. This was the primary challenge of the press fit design. In order to account for the kerf, I had to subtract the thickness of the material by the estimated kerf. I distinguished the kerf by finding the difference in the cad model and the physical model in their size of notch. I found this after my first attempt at printing. The Kerf turned out to be 1 millimeter.  
+
+![Final Parameters](./Paremeters2.png)
+
+Lastly I must use the fillet tool to curve the edges of the design. In order to use that tool effectively, I had to extrude the design into 3d then use the fillet tool on all the corners of the notches. I do this to preserve the amount of times I can press ant fit the notches.  
+
+![Diamondallnotchesr](./Diamondallnotchesr.png)
+
+This is what the final design ended up looking like. I needed to shrink the size of the design in order to limit the amount of waste I produce. Functionally, It didn't really matter if I made a massive piece or a small one so I figured I would use a smaller one. Finally, after doing all of this design I put some cardboard in the laser cutter. 
+
+![In the laser cutter](./Inthecutterr.jpg)
+
+
+
+
+Here are two of the structures I built with the pressfit pieces. For both structures I was able to use my prior failures of prints. I had printed shapes too large. Instead of throwing them away I used them in sculpture. 
+
+![Final Structure 1](./finalstruct1.jpg)
+
+![Final Structure 2](./finalstruct2.jpg)
+
+![Final Structure 3](./Struct3.jpg)
+
+
+In order to make the final structure I had to try multiple times to get the kerf right. I also had issues in printing. I messed up my scaling somewhere in between the cad and the printer once. As shown there are multiple possible press fit structures with this design. 
+
+
+####Tutorial Design
+
+I chose a tutorial for a tool I did not know how to use, the sweep tool. The sweep tool sweeps a sketch profile or planar face along a selected path. First thing I did was make a rectangular prism by starting a new sketch from the top making a rectangle and then extruding it. After that, I created another new sketch but this time I used the text tool to put my name on the top of the rectangle. Then I started a sketch from the side where I used a three point arc. Then using the sweep tool I swept up my name from the rectangle along the path of the arc.
+
+![Sweep](./Sweep.png)
+
+Below is the cad file of the Sweep tool tutorial.
+
+![SweepTutorialv1](./SweepTutorialv1.f3d)
+
+### Designing on my own
+
+I decided to design my phone and my earbuds. First I had to measure my earbuds. They were 50 millimeters by 50.2 mm by 27.8 mm. Here is a photo of my earbuds below.
+
+
+![measuringirl](./measuringirl.jpg)
+
+![Earbuds](./Earbuds.jpg) 
+
+Then I made a rectangle of the same demisions.
+
+![StartofRecangularPrisimr](./StartofRecangularPrisimr.png)
+
+Then I used a lot of the filleting tool to create the curved edges on my earbuds. In Fact I used the fillet tool on every corner of the design. My earbuds have this divot in them about two thirds of the way up. This was easily one of the hardest parts to figure out, since I completed this design before any tutorial on fusion 360. I learned how to use the split tool. I need to split out a piece of the body of the design in order to create the divot. I created a rectangle that was larger than earbuds and used it as my splitting tool.
+![SplittingActionBudsr](./SplittingActionBudsr.png)
+
+After spitting out the piece of body that needed to have a divot, I then started to make the divot. I used the scale tool to make the divot only slightly smaller than the rest of the earbud case. I made the rectangle and then only filleted the vertical lines in order for it to fit in with the rest of the design. Then I used the scale tool to just barely shrink it to create the divot.
+
+![Divot](./Fillingholer.png)
+
+Then I had to create the charging port. I started by creating a new sketch on the side of the earbuds case. I used the arc tool to create the size of a usb type c port. Like most things in this assignment I started with a rectangle. Then I made an arc and deleted the pieces of the rectangle I did not need. The usb port was 8.4 mm by 2.6 mm by 6.65 mm. 
+
+![ArcTool](./ArcTool.png)
+
+Then once again I used the split tool to split out a hole the size of the usb type c port. 
+
+![usb](./Chargingholeinplacer.png)
+
+The next Cad I did was of my phone. I started creating a rectangle of the same size as the phone and then using the fillet tool to match the curve of my phone. The rectangle was 160.8 mm by 781.1 mm by 7.65 mm. 
+
+![Filletohone](./FiletPhone.png)
+
+
+Then I made the lightning port in exactly the same way as the usb port except I changed the dimensions. The dimensions were 6.7 by 1.5 milimeters.  
+
+![iphoneport](./Lightningport.png)
+ 
+Next I designed the volume rocker and the power button. I did almost all the same steps as in the ports. Except, I never made a hole and only put the volume rocker and the power button on the outside. The Power button was 15mm long by 3mm tall. Both volume rockers were 9 mm long by 3 mm tall. 
+
+![VolumeRocker](./VolumeRockerr.png) 
+
+Then I did the camera. The cameras on my phone are on an elevated platform. The platform is 42mm wide by 42mm deep by 1mm high. The platform is filleted to match the rest of the phone.
+
+![CameraSlot](./CameraSlot.png) 
+
+Then I made the cameras. They were 1 mm tall and had a 18.5mm diameter. The flashlight and the other circular thing on the phone are .5mm tall with a 7.8mm diameter.
+
+
+![phone](./Phoneoverviewr.png)
+
+That was my first time using Fusion 360 and I think I did pretty decently. I should have started with an online tutorial, but it was fun to figure it out on my own. I like the cad of my phone better because it seems more refined. I thank you if you have read this far and wish you well in the rest of your day.
+
+
+</xmp>
+
+</body>
 
 
 <script src="../strapdown.js"></script>

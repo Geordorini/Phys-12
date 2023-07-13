@@ -73,6 +73,11 @@ I then needed to make  a cool arduino thing, I wanted to make a switch that you 
 
 ![onlinecircut](./coorect.png)
 
+
+Here is the idea for a switch and a motor in a schematic.
+
+![circuit](./circuitfinal.png)
+
  Here is the code for this cicrutry setup. I used this video https://www.youtube.com/watch?v=cFFwFCuSZN4 a lot while making the code. I also used the inclass work code a lot as well. The goal of the code that is written is to make the wheel spin only if the led and the switch are on. I think it worked. However,
 
 
@@ -96,8 +101,8 @@ void setup() { <br>
 }
 
 void loop() {
-  //If the button is not pressed the motor cannot run <br>
-  if (digitalRead(switchPin))( <br>
+  //If the button is  pressed the motor can run <br>
+  while(digitalRead(switchPin))( <br>
     digitalWrite(ledPin, HIGH)
   ); <br>
   int pot_value = analogRead(A2);   //pot wiper is on A2 <br>

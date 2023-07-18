@@ -65,8 +65,8 @@ void loop() {
     digitalWrite(tx_pin,LOW);            // Step the voltage to zero on conductor 1.
     read_low = analogRead(analog_pin);   // Measure response of conductor 2.
     diff = read_high - read_low;         // desired answer is the difference between high and low.
-  if(diff>1020){
-    Serial.println("KNOCK!");
+  if(diff>1020){                         // make only knocks register
+    Serial.println("KNOCK!");            // print the knock  
   }
   
         

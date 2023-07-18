@@ -94,7 +94,75 @@ The sensor it self is very simple. It is a coper tape sandwitch; Oh the top is c
 The circutry is the exact same as the piezo sensor. 
 
 The first step is to read the capctive scale with no weight. It gave many readings so I took a few of them and averaged them out. Then I started puting items on a scale and weighing them. 
+
+![bernays](./bernays.jpg)
+
+That is a copy of Edwards Bernays's book Propaganda and I did use it as a refernce for weight when trying to find an equation for conversion. After wweihing porpagnda I then put it on the cpactive scale and recorded it in excell. I did this wiht a few other objects and ended up with this excell spreadsheet and this graph. 
+
+![raa](./raaaa.png)
+
+![gra](./gra.png)
+
+
+The trendline in the excell file alows me to make the conversion from digital units to grams. When coding this I ran into many issues with the math of converting due to the defintion of variables. I ended up neepding to multiply then divide rather than multiply by a decimal. Here is the code. Once again this is mainly the website. 
+
+long result;   //variable for the result of the tx_rx measurement.
+int analog_pin = A3;
+int tx_pin = 4;
+
+<pre><code>
+
+void setup() {
+    pinMode(tx_pin, OUTPUT);      //Pin 4 provides the voltage step
+    Serial.begin(9600);
+}
+
+void loop() {
+    result = tx_rx();
+    Serial.println(result);
+}
+
+
+long tx_rx(){         // Function to execute rx_tx algorithm and return a value
+                      // that depends on coupling of two electrodes.
+                      // Value returned is a long integer.
+  int read_high;
+  int read_low;
+  int diff;
+  long int sum;
+  int N_samples = 100;    // Number of samples to take.  Larger number slows it down, but reduces scatter.
+  long int Mult; //x in = of trendline
+  int adder; // b in = of trendline
+  int divder;
+  sum = 0;
+  Mult = 51;
+  divder = 1250;
+  adder = -498.58;
+
+  for (int i = 0; i < N_samples; i++){
+   digitalWrite(tx_pin,HIGH);              // Step the voltage high on conductor 1.
+   read_high = analogRead(analog_pin);     // Measure response of conductor 2.
+   delayMicroseconds(100);                 // Delay to reach steady state.
+   digitalWrite(tx_pin,LOW);               // Step the voltage to zero on conductor 1.
+   read_low = analogRead(analog_pin);      // Measure response of conductor 2.
+   diff = read_high - read_low;            // desired answer is the difference between high and low.
+   sum += diff;// Sums up N_samples of these measurements.
+    sum = (sum * Mult); // use a fraction rather than a decimal to dodge the float issues this is the numerator 
+    sum = (sum / divder); // this the denominator 
+    sum +=  adder // add the b of y = mx + b 
+    
+  
+    
+          //convert the digital to grams using excell trendline                    
+ }
+  return sum;
+}
+
+</pre></code>
+I likely could have used simpler code and achived a better result. 
+
 </xmp>
+
 </body>
 
 <script src="../strapdown.js"></script>

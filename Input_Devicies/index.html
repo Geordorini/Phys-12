@@ -34,13 +34,9 @@ Part one: Piezo
 
 ![piezo](./piezo.jpg)
 
-</xmp>
 
-<video>
- <source src="/build/videos/arcnet.io(7-sec).mp4" type=video/mp4>
-</video>
 
-<xmp style="display:ct;">
+
 <br>
 
 It is really difficult to see but every so often the line goes a little extra crazy and reaches a high point. That happended because I hit the table the piezo sensor was on. That high point is 1,023. Using that knoweldge I am able to disguish a knock or vibration from no knock. Here is the code that is mainly comprisded from the website but I added in the little if statement to only print KNOCK when the table is hit. 
@@ -48,7 +44,33 @@ It is really difficult to see but every so often the line goes a little extra cr
 
 </xmp>
 
+<pre><code>
+int analog_pin = A3;
+int tx_pin = 4;
+int read_high;
+int read_low;
+int diff;
+int big;  
 
+void setup() {
+    pinMode(tx_pin, OUTPUT);      // Pin 4 provides the voltage step
+    Serial.begin(9600);
+}
+
+void loop() {
+    digitalWrite(tx_pin,HIGH);           // Step the voltage high on conductor 1.
+    read_high = analogRead(analog_pin);  // Measure response of conductor 2.
+    delayMicroseconds(100);              // Delay to reach steady state.
+    digitalWrite(tx_pin,LOW);            // Step the voltage to zero on conductor 1.
+    read_low = analogRead(analog_pin);   // Measure response of conductor 2.
+    diff = read_high - read_low;         // desired answer is the difference between high and low.
+  if(diff>1020){
+    Serial.println("KNOCK!");
+  }
+  
+        
+}
+</code></pre>
 
 </body>
 

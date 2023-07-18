@@ -30,19 +30,20 @@ Part one: Piezo
  
  ![circuit](./circutforall.jpg)<br>
 
- The piezo sensor measures vibraitons and they look like this.
+This is a piezo sensor.
 
 ![piezo](./piezo.jpg)
 
 
+ The piezo sensor measures vibraitons and they look like this.
 
+ 
 
 <br>
 
 It is really difficult to see but every so often the line goes a little extra crazy and reaches a high point. That happended because I hit the table the piezo sensor was on. That high point is 1,023. Using that knoweldge I am able to disguish a knock or vibration from no knock. Here is the code that is mainly comprisded from the website but I added in the little if statement to only print KNOCK when the table is hit. 
 
-
-</xmp>
+![updown](./updown.gif)
 
 <pre><code>
 int analog_pin = A3;
@@ -72,6 +73,15 @@ void loop() {
 }
 </code></pre>
 
+Here is a video of the KNOCK sensor working.
+
+![KNockvid](./knockvid.gif)
+
+
+
+
+
+</xmp>
 </body>
 
 <script src="../strapdown.js"></script>

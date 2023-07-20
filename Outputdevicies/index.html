@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<title>Phys-12: Intro to Digital Fabrication Xander Dukas </title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="../style.css" rel="stylesheet">
+
+
+<nav class="navbar navbar-expand-sm navbar-light bg-light">
+  <div style="align-items: left; justify-content:left;" class="container-fluid">
+    <h3 class="nav-title"> Phys-12: Intro to Digital Fabrication</h3>
+    <div class="navbar-nav">
+      <h4></h4>
+      <h4><a class="nav-link" href="../index.html">Home</a></h4>
+      <h4><a class="nav-link" href="../about.html">About</a></h4>
+    </div>
+  </div>
+</nav>
+
+<body>
+
+
+<xmp style="display:ct;">
+<br> 
+
+#### Inputs Week 5
+
+Part one: Piezo 
+ The first input device I tinkered with was the piezo sensor. It senses vibrations. I belived that this could be a useful input device for my final project. This is the circutry I used for the piezo sensor. <br>
+ 
+ ![circuit](./circutforall.jpg)<br>
+
+This is a piezo sensor.
+
+![piezo](./piezo.jpg)
+
+
+ The piezo sensor measures vibraitons and they look like this.
+
+ 
+
+<br>
+
+It is really difficult to see but every so often the line goes a little extra crazy and reaches a high point. That happended because I hit the table the piezo sensor was on. That high point is 1,023. Using that knoweldge I am able to disguish a knock or vibration from no knock. Here is the code that is mainly comprisded from the website but I added in the little if statement to only print KNOCK when the table is hit. 
+
+![updown](./updown.gif)
+
+<pre><code>
+int analog_pin = A3;
+int tx_pin = 4;
+int read_high;
+int read_low;
+int diff;
+int big;  
+
+void setup() {
+    pinMode(tx_pin, OUTPUT);      // Pin 4 provides the voltage step
+    Serial.begin(9600);
+}
+
+void loop() {
+    digitalWrite(tx_pin,HIGH);           // Step the voltage high on conductor 1.
+    read_high = analogRead(analog_pin);  // Measure response of conductor 2.
+    delayMicroseconds(100);              // Delay to reach steady state.
+    digitalWrite(tx_pin,LOW);            // Step the voltage to zero on conductor 1.
+    read_low = analogRead(analog_pin);   // Measure response of conductor 2.
+    diff = read_high - read_low;         // desired answer is the difference between high and low.
+  if(diff>1020){                         // make only knocks register
+    Serial.println("KNOCK!");            // print the knock  
+  }
+  
+        
+}
+</code></pre>
+
+Here is a video of the KNOCK sensor working.
+
+![KNockvid](./knockvid.gif)
+
+There is not a really good way to measure the vaules of the piezo meter. I was able to make a knock or no knock.
+
+### Part Two: Capacitive Sensor
+
+This is much cooler than the peizo sensor. Using copper spring and some matierals to hold them up I made a Capacitive scale. 
+
+![mid](./mid.jpg)
+
+The sensor it self is very simple. It is a coper tape sandwitch; Oh the top is coper tape facing down and the tape rests on a peice of carboard. The cardboard is supported by five springs. The springs sit on a peice of wood to get simular measuremnets every time. The wood sits on the copper tape. The cooper tape faces each other. 
+
+
+![circuit](./circutforall.jpg)<br>
+
+
+The circutry is the exact same as the piezo sensor. 
+
+The first step is to read the capctive scale with no weight. It gave many readings so I took a few of them and averaged them out. Then I started puting items on a scale and weighing them. 
+
+![bernays](./bernays.jpg)
+
+That is a copy of Edwards Bernays's book Propaganda and I did use it as a refernce for weight when trying to find an equation for conversion. After wweihing porpagnda I then put it on the cpactive scale and recorded it in excell. I did this wiht a few other objects and ended up with this excell spreadsheet and this graph. 
+
+![raa](./raaaaa.png)
+
+![gra](./gra.png)
+
+
+The trendline in the excell file alows me to make the conversion from digital units to grams. When coding this I ran into many issues with the math of converting due to the defintion of variables. I ended up neepding to multiply then divide rather than multiply by a decimal. Here is the code. Once again this is mainly the website. 
+
+long result;   //variable for the result of the tx_rx measurement.
+int analog_pin = A3;
+int tx_pin = 4;
+
+<pre><code>
+
+void setup() {
+    pinMode(tx_pin, OUTPUT);      //Pin 4 provides the voltage step
+    Serial.begin(9600);
+}
+
+void loop() {
+    result = tx_rx();
+    Serial.println(result);
+}
+
+
+long tx_rx(){         // Function to execute rx_tx algorithm and return a value
+                      // that depends on coupling of two electrodes.
+                      // Value returned is a long integer.
+  int read_high;
+  int read_low;
+  int diff;
+  long int sum;
+  int N_samples = 100;    // Number of samples to take.  Larger number slows it down, but reduces scatter.
+  long int Mult; //x in = of trendline
+  int adder; // b in = of trendline
+  int divder;
+  sum = 0;
+  Mult = 51;
+  divder = 1250;
+  adder = -498.58;
+
+  for (int i = 0; i < N_samples; i++){
+   digitalWrite(tx_pin,HIGH);              // Step the voltage high on conductor 1.
+   read_high = analogRead(analog_pin);     // Measure response of conductor 2.
+   delayMicroseconds(100);                 // Delay to reach steady state.
+   digitalWrite(tx_pin,LOW);               // Step the voltage to zero on conductor 1.
+   read_low = analogRead(analog_pin);      // Measure response of conductor 2.
+   diff = read_high - read_low;            // desired answer is the difference between high and low.
+   sum += diff;// Sums up N_samples of these measurements.
+    sum = (sum * Mult); // use a fraction rather than a decimal to dodge the float issues this is the numerator 
+    sum = (sum / divder); // this the denominator 
+    sum +=  adder // add the b of y = mx + b 
+    
+  
+    
+          //convert the digital to grams using excell trendline                    
+ }
+  return sum;
+}
+
+</pre></code>
+I likely could have used simpler code and achived a better result. 
+Here is my wallet on the scale.
+
+![wallet](./wallet.gif)
+
+</xmp>
+
+</body>
+
+<script src="../strapdown.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" ></script>
+
+</html>

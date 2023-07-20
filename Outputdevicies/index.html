@@ -78,16 +78,138 @@ void loop() {
 </code></pre>
 
 
-The real challenge is if I can make this use millis before tommorow. 
+The real challenge is if I can make this use millis before tommorow. I now understand millis but I doubt I can use it like this. One solution I cam up with for a standalone program for the mcdonalds theme without the delay is this.
 
 
 
 
 
 <pre><code>
+int buzzerPin = 10;
+
+unsigned long previousTime = 0;
+
+void setup() {
+    pinMode(buzzerPin, OUTPUT);
+}
+
+void loop() {
+
+unsigned long currentTime = millis()
+  
+    tone(buzzerPin, 261.63, 200);
+  if (currentTime >= 400){
+    tone(buzzerPin, 293.66, 400);
+  }
+  if (currentTime >= 1200){
+    tone(buzzerPin, 329.63, 400);
+  }
+  If (currentTime  >= 2000){
+    tone(buzzerPin, 440.00, 400);
+  } 
+  If (currentTime >= 2800){
+    tone(buzzerPin, 392.00, 400);
+  }
+}
+   
 
 
+</pre></code>
 
+I effectively timed all the actions out and set it on a timeling. This one obviously did not work because alll of the sounds would keep playing. I need to put this into a loop because this code will become a funtion and I can not relly on millis. 
+
+<pre><code>
+  int buzzerPin = 10;
+
+unsigned long previousTime = 0;
+
+void setup() {
+    pinMode(buzzerPin, OUTPUT);
+}
+
+void loop() {
+
+unsigned long currentTime = millis() - previousTime; //reset the clock 
+    if (currentTime >= 0){
+      tone(buzzerPin, 261.63, 200);
+        if (currentTime >= 400){
+    tone(buzzerPin, 293.66, 400);
+            if (currentTime >= 1200){
+    tone(buzzerPin, 329.63, 400);
+             if (currentTime  >= 2000){
+    tone(buzzerPin, 440.00, 400);
+                if (currentTime >= 2800){
+    tone(buzzerPin, 392.00, 400);
+              }
+
+            } 
+         }
+
+      }
+    }
+    
+      
+        
+          
+previousTime = currentTime;
+}
+  
+</pre></code>
+I am very confused as to why this does not work. I thought you could nest if statements within each other. 
+
+Anyway I had finished the buzzer and the piezo sensor code so it was time to combine them. 
+
+<pre><code>
+  int buzzerPin = 10;
+int butt = 5;
+
+int analog_pin = A3;
+int tx_pin = 4;
+int read_high;
+int read_low;
+int diff;
+int big;  
+
+
+void setup() {
+    pinMode(buzzerPin, OUTPUT);
+    pinMode(tx_pin, OUTPUT);      // Pin 4 provides the voltage step
+    Serial.begin(9600);
+}
+
+void loop() {
+
+     digitalWrite(tx_pin,HIGH);           // Step the voltage high on conductor 1.
+    read_high = analogRead(analog_pin);  // Measure response of conductor 2.
+    delayMicroseconds(100);              // Delay to reach steady state.
+    digitalWrite(tx_pin,LOW);            // Step the voltage to zero on conductor 1.
+    read_low = analogRead(analog_pin);   // Measure response of conductor 2.
+    diff = read_high - read_low;         // desired answer is the difference between high and low.
+  if(diff>1020){
+    Serial.println("KNOCK!");
+    Mcfunction();
+  }
+}
+
+void Mcfunction(){
+ 
+ 
+ 
+  tone(buzzerPin, 261.63, 200);
+   delay(200);
+    tone(buzzerPin, 293.66, 400);
+    delay(400);
+    tone(buzzerPin, 329.63, 400);
+    delay(400);
+    tone(buzzerPin, 440.00, 400);
+    delay(400);
+    tone(buzzerPin, 392.00, 400);
+    delay(400);
+   
+    delay(2000);
+
+
+}
 </pre></code>
 
 </xmp>

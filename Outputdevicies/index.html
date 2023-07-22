@@ -158,6 +158,43 @@ previousTime = currentTime;
 </pre></code>
 I am very confused as to why this does not work. I thought you could nest if statements within each other. 
 
+## I did it NO MORE DELAY
+<pre><code>
+  int buzzerPin = 10;
+
+unsigned long previousTime = 0;
+
+void setup() {
+    pinMode(buzzerPin, OUTPUT);
+}
+
+void loop() {
+
+unsigned long currentTime = millis();
+  
+    if ((currentTime - previousTime >= 0) && (currentTime - previousTime <= 10)){
+      tone(buzzerPin, 261.63, 200);
+    }
+        if ((currentTime - previousTime >= 205) && (currentTime - previousTime <= 210)){
+    tone(buzzerPin, 293.66, 400);
+        }
+            if ((currentTime - previousTime >= 500) && (currentTime - previousTime <= 505)){
+    tone(buzzerPin, 329.63, 400);
+            }
+            if ((currentTime - previousTime  >= 800) && (currentTime - previousTime <= 900)) {
+    tone(buzzerPin, 440.00, 400);
+            }
+                if ((currentTime - previousTime >= 1200) && (currentTime - previousTime <= 1400)){
+    tone(buzzerPin, 392.00, 400);
+
+              }
+
+  if (currentTime - previousTime > 2000){
+
+    previousTime = currentTime;
+  }
+  </pre></code>
+
 Anyway I had finished the buzzer and the piezo sensor code so it was time to combine them. 
 
 <pre><code>
@@ -196,19 +233,29 @@ void Mcfunction(){
  
  
  
-  tone(buzzerPin, 261.63, 200);
-   delay(200);
+  unsigned long currentTime = millis();
+  
+    if ((currentTime - previousTime >= 0) && (currentTime - previousTime <= 10)){
+      tone(buzzerPin, 261.63, 200);
+    }
+        if ((currentTime - previousTime >= 205) && (currentTime - previousTime <= 210)){
     tone(buzzerPin, 293.66, 400);
-    delay(400);
+        }
+            if ((currentTime - previousTime >= 500) && (currentTime - previousTime <= 505)){
     tone(buzzerPin, 329.63, 400);
-    delay(400);
+            }
+            if ((currentTime - previousTime  >= 800) && (currentTime - previousTime <= 900)) {
     tone(buzzerPin, 440.00, 400);
-    delay(400);
+            }
+                if ((currentTime - previousTime >= 1200) && (currentTime - previousTime <= 1400)){
     tone(buzzerPin, 392.00, 400);
-    delay(400);
-   
-    delay(2000);
 
+              }
+
+  if (currentTime - previousTime > 2000){
+
+    previousTime = currentTime;
+  }
 
 }
 </pre></code>

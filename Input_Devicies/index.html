@@ -142,7 +142,7 @@ long tx_rx(){         // Function to execute rx_tx algorithm and return a value
   for (int i = 0; i < N_samples; i++){
    digitalWrite(tx_pin,HIGH);              // Step the voltage high on conductor 1.
    read_high = analogRead(analog_pin);     // Measure response of conductor 2.
-   delayMicroseconds(100);                 // Delay to reach steady state.
+   
    digitalWrite(tx_pin,LOW);               // Step the voltage to zero on conductor 1.
    read_low = analogRead(analog_pin);      // Measure response of conductor 2.
    diff = read_high - read_low;            // desired answer is the difference between high and low.

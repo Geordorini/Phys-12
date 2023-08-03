@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<title>Phys-12: Intro to Digital Fabrication Xander Dukas </title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="../style.css" rel="stylesheet">
+
+
+<nav class="navbar navbar-expand-sm navbar-light bg-light">
+  <div style="align-items: left; justify-content:left;" class="container-fluid">
+    <h3 class="nav-title"> Phys-12: Intro to Digital Fabrication</h3>
+    <div class="navbar-nav">
+      <h4></h4>
+      <h4><a class="nav-link" href="../index.html">Home</a></h4>
+      <h4><a class="nav-link" href="../about.html">About</a></h4>
+    </div>
+  </div>
+</nav>
+
+<body>
+
+
+<xmp style="display:ct;">
+<br> 
+
+##### The Final Project: The Classic Lock 
+
+Using a capacitive sensor and a lot of code, I intened to make a Classic lock box as a prototype for my bedroom door at home. I have always dreamed of having a lock that requiers some test of knowldge. This box requiers you to enter a serries of knocks. The knocking pattern is known by me. But of course there is a clue on the box. "Arma virumque cano, Troiae qui primus ab oris" is written on the front. Mabye you would have to use Latin scansion to to open the box. This protoype lock alows for the ditching of keys. aEverytime I leave my dorm there is this thought in the back of my head that I forgot my keys. Getting rid of that pesky thought is one of the many advantages of the classic lock. 
+## Box Design 
+Firstly I had to design the box. 
+
+![simplebox](./simplebox.png)
+
+![boxagain](./doordesign.png)
+
+This resulted in this box 
+
+![box](./box.jpg)
+
+The box is only the casing for the prototype. 
+The doors were the next elemnt I needed to design. I thought that servo motors would work great and they did. They allow the box to oppen automatically. Rather than using a hinge and a door with lock and king which can get lockpicked this desgin can not get lock picked. It can only be moved digitaly. 
+
+![door](./door.jpg )
+
+In order to move the doors I needed a wat to connect the servo lever to them. I decided on an odd method. I wanted to wedge the servo arm into cardboard. I also had to put heat shrink around it to keep the servo pushing the door. 
+
+The input device for this lock is a capcitve sensor. I tried different matierals for what I call the squish to knock ratio. I wanted something that squished down a little but also could give a crispy knock. 
+Here is is snipets from matieral testing. 
+<br>
+![poolnoodle.gif](./poolnoodle.gif)
+<br>
+
+![spinrg11](./spring1,gif)
+<br>
+
+![mats](./materials.jpg)
+
+I often need to calibrate the capcitvie sensor sense it is so sensitive. 
+
+##The Code
+
+I would like to thank the man dpicted in this portait for helping with coding.
+![tastefulportait](./tastefulportait.png)
+
+<pre><code>
+
+//used this code as a framwork for the passowrd
+//DroneBot Workshop 2020 https :  //dronebotworkshop.com
+
+// Based upon code from https :  //www.circuitbasics.com/
+
+
+int buzzerPin = 6;
+int analog_pin = A3;
+int tx_pin = 4;
+int read_high;
+int read_low;
+int diff;
+#include Servo.h
+int Mcfunciton;
+long result;
+bool long1 = false;
+bool short1 = false;
+bool short2 = false;
+unsigned long previousTime = 0;
+
+Servo myservo;  // create servo object to control a servo
+Servo other;
+
+int pos = 0;  // variable to store the servo position
+#define Password_Length 4
+  // Character to hold password input
+char Data[Password_Length];
+// Password
+char Master[Password_Length] = { 1, 0, 0 };
+
+// Pin connected to lock relay input realy for debugging
+int lockOutput = 13;
+
+// Counter for character entries
+byte data_count = 0;
+
+// Character to hold key input
+char customKey;
+
+
+
+void setup() {
+  pinMode(tx_pin, OUTPUT);  // Pin 4 provides the voltage step
+  myservo.attach(9);
+  other.attach(10);        // attaches the servo on pin 9 to the servo object
+  Serial.begin(9600);
+  pinMode(tx_pin, OUTPUT);  //Pin 4 provides the voltage step
+  myservo.write(0);
+  other.write(90);
+  
+  // Set lockOutput as an OUTPUT pin
+  pinMode(lockOutput, OUTPUT);
+}
+void clearData() {
+  // Go through array and clear data
+  while (data_count != 0) {
+    Data[data_count--] = 0;
+  }
+  return;
+}
+
+void Mcjingle() {
+
+
+
+  unsigned long currentTime = millis();
+
+  if ((currentTime - previousTime >= 0) && (currentTime - previousTime <= 10)) {
+    tone(buzzerPin, 261.63, 200);
+  }
+  if ((currentTime - previousTime >= 205) && (currentTime - previousTime <= 210)) {
+    tone(buzzerPin, 293.66, 400);
+  }
+  if ((currentTime - previousTime >= 500) && (currentTime - previousTime <= 505)) {
+    tone(buzzerPin, 329.63, 400);
+  }
+  if ((currentTime - previousTime >= 800) && (currentTime - previousTime <= 900)) {
+    tone(buzzerPin, 440.00, 400);
+  }
+  if ((currentTime - previousTime >= 1200) && (currentTime - previousTime <= 1400)) {
+    tone(buzzerPin, 392.00, 400);
+  }
+
+  if (currentTime - previousTime > 2000) {
+
+    previousTime = currentTime;
+  }
+}
+
+long tx_rx() {  // Function to execute rx_tx algorithm and return a value
+                // that depends on coupling of two electrodes.
+                // Value returned is a long integer.
+  int read_high;
+  int read_low;
+  int diff;
+  long int sum;
+  int N_samples = 100;  // Number of samples to take.  Larger number slows it down, but reduces scatter.
+
+  sum = 0;
+
+  for (int i = 0; i < N_samples; i++) {
+    digitalWrite(tx_pin, HIGH);          // Step the voltage high on conductor 1.
+    read_high = analogRead(analog_pin);  // Measure response of conductor 2.
+    delayMicroseconds(100);              // Delay to reach steady state.
+    digitalWrite(tx_pin, LOW);           // Step the voltage to zero on conductor 1.
+    read_low = analogRead(analog_pin);   // Measure response of conductor 2.
+    diff = read_high - read_low;         // desired answer is the difference between high and low.
+    sum += diff;                         // Sums up N_samples of these measurements.
+  }
+  return sum;
+}
+void Mcfunction() {
+  for (pos = 90; pos >= 0; pos += 1)
+    other.write(pos);
+  for (pos = 0; pos <= 90; pos += 1) {  // goes from 0 degrees to 180 degrees
+    // in steps of 1 degree
+    myservo.write(pos);
+      // tell servo to go to position in variable 'pos'
+  }
+}
+
+bool Handown = false;
+
+unsigned long currentTime = millis();
+
+
+
+void loop() {
+  result = tx_rx();
+  // Serial.println("Min:0,Max:30000");
+  // Serial.println(result);
+  previousTime = millis();
+
+  Handown = false;
+  while (result > 23000) {
+    if (Handown == false) {
+      Handown = true;
+    }
+    result = tx_rx();
+  }
+
+
+
+
+  currentTime = millis();
+  if (currentTime - previousTime > 85) {
+    Serial.println("Long");
+    customKey = 1;
+  } else if (currentTime - previousTime > 30) {
+    Serial.println("Short");
+    customKey = 0;
+  }
+
+  if (customKey != 2) {
+    // Enter keypress into array and increment counter
+    Data[data_count] = customKey;
+    data_count++;
+    customKey = 2;
+  }
+  // else if (customKey = 0) {
+  //   Data[data_count] = customKey;
+  //   data_count++;
+  // }
+
+  if (data_count == Password_Length - 1) {
+
+
+    if (!strcmp(Data, Master)) {
+      // Password is correct
+
+      // Turn on relay for 5 seconds
+      
+      Serial.println("right");
+      Mcfunction();
+      clearData();
+    } else {
+      // Password is incorrect
+      Serial.println("Incorrect");
+      Mcjingle();
+      clearData();
+    }
+  }
+}
+
+</pre></code>
+
+I changed the code a lot from the website. I used it largely to hlep with arrays. This code finds out if the knock sesnor is activated times it and sees if it matches with the passowrd. If it matches the servos open the doors. If it doesnt match a mcdonalds jingle plays. 
+
+
+
+</xmp>
+ 
+
+
+
+ 
+
+
+</body>
+
+
+
+
+<script src="../strapdown.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" ></script>
+
+</html>

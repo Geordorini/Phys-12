@@ -25,7 +25,7 @@
 
 ##### The Final Project: The Classic Lock 
 
-Using a capacitive sensor and a lot of code, I intened to make a Classic lock box as a prototype for my bedroom door at home. I have always dreamed of having a lock that requiers some test of knowldge. This box requiers you to enter a serries of knocks. The knocking pattern is known by me. But of course there is a clue on the box. "Arma virumque cano, Troiae qui primus ab oris" is written on the front. Mabye you would have to use Latin scansion to to open the box. This protoype lock alows for the ditching of keys. aEverytime I leave my dorm there is this thought in the back of my head that I forgot my keys. Getting rid of that pesky thought is one of the many advantages of the classic lock. 
+Using a capacitive sensor and a lot of code, I intended to make a Classic lock box as a prototype for my bedroom door at home. I have always dreamed of having a lock that requires some test of knowledge. This box requires you to enter a serries of knocks. The knocking pattern is known by me. But of course there is a clue on the box. "Arma virumque cano, Troiae qui primus ab oris" is written on the front. Maybe you would have to use Latin scansion to open the box. This prototype lock allows for the ditching of keys. everytime I leave my dorm there is this thought in the back of my head that I forgot my keys. Getting rid of that pesky thought is one of the many advantages of the classic lock. 
 ## Box Design 
 Firstly I had to design the box. 
 
@@ -38,14 +38,16 @@ This resulted in this box
 ![box](./box.jpg)
 
 The box is only the casing for the prototype. 
-The doors were the next elemnt I needed to design. I thought that servo motors would work great and they did. They allow the box to oppen automatically. Rather than using a hinge and a door with lock and king which can get lockpicked this desgin can not get lock picked. It can only be moved digitaly. 
+The doors were the next element I needed to design. I thought that servo motors would work great and they did. They allow the box to open automatically. Rather than using a hinge and a door with lock and king which can get lock picked this design can not get lock picked. It can only be moved digitally. 
+
 
 ![door](./door.jpg)
 
 In order to move the doors I needed a wat to connect the servo lever to them. I decided on an odd method. I wanted to wedge the servo arm into cardboard. I also had to put heat shrink around it to keep the servo pushing the door. 
 
-The input device for this lock is a capcitve sensor. I tried different matierals for what I call the squish to knock ratio. I wanted something that squished down a little but also could give a crispy knock. 
-Here is is snipets from matieral testing. 
+The input device for this lock is a capacitive sensor. I tried different materials for what I call the squish to knock ratio. I wanted something that squished down a little but also could give a crispy knock. 
+Here are snippets from material testing. 
+g. 
 <br>
 ![poolnoodle.gif](./poolnoodle.gif)
 <br>
@@ -55,11 +57,12 @@ Here is is snipets from matieral testing.
 
 ![mats](./materials.jpg)
 
-I often need to calibrate the capcitvie sensor sense it is so sensitive. 
+
+I often need to calibrate the capacitive sensor because it is so sensitive. 
 
 ##The Code
 
-I would like to thank the man dpicted in this portait for helping with coding.
+I would like to thank the man depicted in this portrait for helping with coding.
 
 ![tastefulportait](./tastefulportrait.png)
 
@@ -251,9 +254,9 @@ void loop() {
 
 </pre></code>
 
-I changed the code a lot from the website. I used it largely to hlep with arrays. This code finds out if the knock sesnor is activated times it and sees if it matches with the passowrd. If it matches the servos open the doors. If it doesnt match a mcdonalds jingle plays. 
+I changed the code a lot from the website. I used i changed the code a lot from the website. I used it largely to help with arrays. This code finds out if the knock sensor is activated times it and sees if it matches with the password. If it matches the servos, open the doors. If it doesn't match a mcdonalds jingle plays. 
 
-Here is the arduino. 
+Here is the arduino.
 
 ![side](./side.JPG)
 

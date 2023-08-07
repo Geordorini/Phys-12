@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<title>Phys-12: Intro to Digital Fabrication Xander Dukas </title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="../style.css" rel="stylesheet">
+
+
+<nav class="navbar navbar-expand-sm navbar-light bg-light">
+  <div style="align-items: left; justify-content:left;" class="container-fluid">
+    <h3 class="nav-title"> Phys-12: Intro to Digital Fabrication</h3>
+    <div class="navbar-nav">
+      <h4></h4>
+      <h4><a class="nav-link" href="../index.html">Home</a></h4>
+      <h4><a class="nav-link" href="../about.html">About</a></h4>
+    </div>
+  </div>
+</nav>
+
+<body>
+
+
+<xmp style="display:ct;">
+<br> 
+
+#### Using Wifi with an Esp 32
+
+For this assignment we needed to get an esp to communicate over the web. I was able to get a live feed from the Esp 32 cam over wifi. I struggled for a long time with getting any esp to function with my computer. I had feeling it was Windows 11. After returning home to my computer that runs windows 10, the esp communicated with no issue. 
+This is the Esp 32 cam.
+![phto](./photo1.jpg)
+There are two pieces the top which is actualy the esp cam with the camera. 
+![bot](./bot.jpg)
+Then there is the bottum which saves me from working with the pinouts of the cam and also saves me from using FTDI programmer.
+![top](./top.jpg)
+
+In order to upload code and use the cam I needed to install the esp 32 drivers. That and all of the code for this assignment can be found 
+<a href="https://randomnerdtutorials.com/esp32-cam-video-streaming-face-recognition-arduino-ide/"> here </a>
+
+After installing the drivers I then pulled up the example code for the Esp Cam. 
+
+<a href="https://https://geordorini.github.io/Phys-12/hiddencode/index.html"> Link to only code </a>
+
+The code from the examples list for Esp 32s. I had to put the name of my wifi adress and the password. I refuse to publish either of those things online.
+
+I then uploaded the code to the arduino. It then gave the IP adress of the chip. I was then able to see a live feed of the camera. This feed was being shown to everyone in the network if they wanted to access it. 
+This is what the website looks like. 
+![feed](./feed0.png) 
+This the camera pointing at the website which is showing what the camera is showing. 
+![camincam.png](./camincam.png)
+
+</xmp>
+
+</body>
+
+
+
+
+<script src="../strapdown.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" ></script>
+
+</html>
